@@ -1,0 +1,6 @@
+.log
+__pycache__
+venv
+*.gguf
+src/components/artifacts/models/tiny_llama/tinyllama.gguf
+src/components/artifacts/
