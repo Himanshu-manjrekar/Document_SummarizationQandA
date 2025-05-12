@@ -35,7 +35,7 @@ pip install -r requirements.txt
 
 ---
 
-##  Steps to carry after Installation
+## 📈 Steps to carry after Installation
 
 - **Download Tiny-llama-gguf**: url: https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF
 - **Move the GGUF file**: move to downloaded gguf file to `src/components/artifacts/models/tiny_llama/`
