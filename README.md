@@ -35,7 +35,7 @@ pip install -r requirements.txt
 
 ---
 
-## Steps to carry after Installation
+##  Steps to carry after Installation
 
 - **Download Tiny-llama-gguf**: url: https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF
 - **Move the GGUF file**: move to downloaded gguf file to src/components/artifacts/models/tiny_llama/ 
@@ -49,3 +49,14 @@ streamlit run app.py
 
 ## 🧑‍💻 Author
 Himanshu Manjrekar
+
+## 📸 Application Screenshots
+
+- **🖼️ Application UI**: 
+<img src="src\components\app_images\1.PNG" alt="Application UI"> 
+
+- **🖼️ Chat Q&A**:
+<img src="src\components\app_images\5.PNG" alt="Chat Q&A">
+
+- **🖼️ Summarization**:
+<img src="src\components\app_images\7.PNG" alt="Summarization">
