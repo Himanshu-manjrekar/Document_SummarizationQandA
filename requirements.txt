@@ -1,7 +1,7 @@
 numpy
 tensorflow==2.17.1
 transformers==4.47.0
-torch
+torch --index-url https://download.pytorch.org/whl/cpu
 python-docx
 PyPDF2
 langchain==0.3.23
