@@ -19,8 +19,12 @@ st.set_page_config(
 @st.cache_resource
 def load_llms():
     tiny_llama = chat_model().init_model()
-    return tiny_llama
-tiny_llama = load_llms() #Loading tiny llama
+    print("Initializing Bart-large-cnn")
+    bart_large = pipeline("summarization", model = "facebook/bart-large-cnn")
+    print("Initialization of Bart-large-cnn completed")
+    return tiny_llama, bart_large
+tiny_llama = load_llms()[0] # Loading tiny llama
+bart_large = load_llms()[1] # Loading summarizer
 
 
 # Custom CSS for better UI
@@ -127,7 +131,7 @@ def main():
         uploaded_file = st.file_uploader("Upload a document and choose an action.", accept_multiple_files=False, type=['pdf', 'docx', 'txt'])
         
         if uploaded_file:
-            st.success(f"files uploaded successfully!")
+            # st.success(f"files uploaded successfully!")
             st.session_state.uploaded_file = uploaded_file
         st.markdown("</div>", unsafe_allow_html=True)
         
@@ -244,42 +248,12 @@ Answer:
                 st.subheader("📝 Document Summary")
                 
                 with st.spinner("Generating summary..."):
-                    time.sleep(2)  # Simulate summary generation
-                    
-                    # Display the summary (simulated)
-                    st.markdown("### Executive Summary")
-                    st.markdown("""
-                    This is a simulated document summary. In a real implementation, this would contain actual summaries of your uploaded documents.
-                    
-                    **Key Points:**
-                    1. First main point extracted from the document
-                    2. Second important concept identified
-                    3. Third significant finding from analysis
-                    
-                    **Topics Covered:**
-                    - Topic A with 25% coverage
-                    - Topic B with 40% coverage
-                    - Topic C with 35% coverage
-                    """)
-                    
-                    # Simulated visualization
-                    st.subheader("Document Insights")
-                    cols = st.columns(2)
-                    
-                    with cols[0]:
-                        st.markdown("#### Document Statistics:")
-                        st.markdown("- **Pages:** 42")
-                        st.markdown("- **Word Count:** 12,568")
-                        st.markdown("- **Main Entities:** Company X, Project Y, Technology Z")
-                        st.markdown("- **Sentiment:** Mostly positive")
-                    
-                    with cols[1]:
-                        st.markdown("#### Top Keywords:")
-                        st.markdown("- innovation (24 mentions)")
-                        st.markdown("- analysis (18 mentions)")
-                        st.markdown("- development (15 mentions)")
-                        st.markdown("- strategy (12 mentions)")
-                
+                    summarizer = summarizer_model()
+                    utils = utilities()
+                    chunks = utils.Operation_handler(uploaded_file)
+                    summary = summarizer.summarize_the_data(bart_large, chunks)
+                    st.subheader("Generated Summary")
+                    st.write(summary)
                 st.markdown("</div>", unsafe_allow_html=True)
 
 # Run the app
